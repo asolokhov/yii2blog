@@ -1,0 +1,56 @@
+1) Установка проекта 
+composer.phar create-project yiisoft/yii2-app-basic name_project
+если не указать имя, укажет дефолтное 
+
+2) Настройка сайта
+1. step
+create file {root}/.htaccess:
+
+<IfModule mod_rewrite.c>
+    Options +FollowSymlinks
+    RewriteEngine On
+</IfModule>
+ 
+<IfModule mod_rewrite.c>
+    RewriteCond %{REQUEST_URI} ^/.*
+    RewriteRule ^(.*)$ web/$1 [L]
+
+    RewriteCond %{REQUEST_URI} !^/web/
+    RewriteCond %{REQUEST_FILENAME} !-f [OR]
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^.*$ web/index.php
+</IfModule> 
+
+2. step
+create file {root}/web/.htaccess:
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . index.php
+
+3. step
+update file {root}/config/web.php:
+
+'request' => [
+    'baseUrl' => '',
+],
+'urlManager' => [
+    'enablePrettyUrl' => true,
+    'showScriptName' => false,
+    'rules' => [
+        '' => 'site/index',
+        '<action>'=>'site/<action>',
+    ],
+],
+
+3) Миграции
+php yii migrate/create create_article_table
+php yii migrate
+
+4)
+app\modules\admin\Module
+
+app\models\Articles
+app\models\ArticlesSearch
+app\modules\admin\controllers\ArticleController
+@app\modules\admin\views\article
