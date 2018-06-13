@@ -28,7 +28,7 @@ use yii\helpers\Url;
 
                         <div class="social-share">
 							<span
-                                class="social-share-title pull-left text-capitalize">By <?= $article->author->name?> On <?= $article->getDate();?></span>
+                                class="social-share-title pull-left text-capitalize">By Anton On <?= $article->getDate();?></span>
                             <ul class="text-center pull-right">
                                 <li><a class="s-facebook" href="#"><i class="fa fa-facebook"></i></a></li>
                                 <li><a class="s-twitter" href="#"><i class="fa fa-twitter"></i></a></li>
@@ -42,8 +42,8 @@ use yii\helpers\Url;
 
              <?= $this->render('/partials/comment', [
                  'article'=>$article,
-                 'comments'=>$comments,
-                 'commentForm'=>$commentForm
+                 //'comments'=>$comments,
+                 //'commentForm'=>$commentForm
              ])?>
             </div>
             <?= $this->render('/partials/sidebar', [
